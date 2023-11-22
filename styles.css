@@ -1,20 +1,24 @@
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Candara', sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
 }
 
 header {
-    background-color: #333;
+    background-color: #d9d99b;
     color: #fff;
     text-align: center;
-    padding: 20px 0;
+    padding: 35px ;
 }
 
 #logo {
-    max-width: 100px;
-    max-height: 100px;
+    
+    position: absolute;
+    top: 10px;
+    left: 5px;
+    width: 250px;
+    height:max-content;
 }
 
 h1 {
@@ -50,8 +54,8 @@ input {
 
 button {
     padding: 10px 15px;
-    background-color: #333;
-    color: #fff;
+    background-color: #87cdcd;
+    color: #ffffff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -77,7 +81,7 @@ li {
 #supprimer, #modifier {
     margin-left: 10px;
     padding: 5px 10px;
-    background-color: #dc3545;
+    background-color: #dc35467d;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -85,5 +89,5 @@ li {
 }
 
 #modifier {
-    background-color: #007bff;
+    background-color: #87cdcd;
 }
