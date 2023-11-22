@@ -1,5 +1,53 @@
 // Tableau pour stocker les patients
-var patients = [];
+var patients = [
+{   nom: "Aamira",
+    prenom: "Mohamed",
+    date_naissance:"03/04/1996",
+    age: 27,
+    telephone: "21955975",
+    email: "aamira.mohamed@gmail.com",
+    adresse: "Rue de la Paix",
+    dernier_rv: "11/10/2023",
+    prochain_rv: "11/01/2024",
+    note_consultations:"1. Detartrage"
+},
+{
+    nom: "Dupont",
+    prenom: "Marie",
+    date_naissance: "12/05/1980",
+    age: 42,
+    telephone: "0123456789",
+    email: "marie.dupont@example.com",
+    adresse: "Avenue des Roses",
+    dernier_rv: "03/10/2023",
+    prochain_rv: "15/01/2024",
+    note_consultations: "2. Extraction dentaire"
+  },
+  {
+    nom: "Martin",
+    prenom: "Sophie",
+    date_naissance: "25/08/1995",
+    age: 27,
+    telephone: "0765432109",
+    email: "sophie.martin@example.com",
+    adresse: "Rue de la Liberté",
+    dernier_rv: "01/09/2023",
+    prochain_rv: "10/12/2023",
+    note_consultations: "Traitement de canal"
+  },
+  {
+    nom: "Lefevre",
+    prenom: "Luc",
+    date_naissance: "18/03/1972",
+    age: 50,
+    telephone: "0987654321",
+    email: "luc.lefevre@example.com",
+    adresse: "Place de la Gare",
+    dernier_rv: "20/11/2023",
+    prochain_rv: "05/03/2024",
+    note_consultations: "3. Contrôle de routine"
+  }
+];
 
 // Fonction pour ajouter un patient
 function ajouterPatient() {
@@ -59,7 +107,8 @@ function afficherListePatients() {
         var patient = patients[i];
 
         // Ajouter un bouton de suppression et de modification pour chaque patient
-        patientsListe.append('<li>' + patient.nom + ' ' + patient.prenom + ' - Age : ' + patient.age + ' ans' +
+        patientsListe.append('<li>' +
+        '<a href="details_patient.html?index=' + i + '">' + patient.nom + ' ' + patient.prenom + ' - Age : ' + patient.age + ' ans</a>' +
             ' <button id= supprimer onclick="supprimerPatient(' + i + ')">Supprimer</button>' +
             ' <button id= modifier onclick="modifierPatient(' + i + ')">Modifier</button></li>');
     }
