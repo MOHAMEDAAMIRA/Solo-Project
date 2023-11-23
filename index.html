@@ -1,46 +1,74 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>Gestion des Patients</title>
+    <title>Patient Management</title>
 </head>
+
 <body>
     <header>
         <img id="logo" src="/assets/logo-sayma-z.png" alt="Logo">
         <h1>Dr. Seyma Zeggdene</h1>
-        <h2>Gestion des Patients</h2>
+        <h2>Patient Management</h2>
     </header>
-    
-    <section id="patient-form">
-        <h2>Ajouter un nouveau patient</h2>
-        <form id="add-patient-form">
-            <label for="nom">Nom :</label>
-            <input type="text" id="nom" required>
 
-            <label for="prenom">Prénom :</label>
-            <input type="text" id="prenom" required>
+    <section id="main-section">
+        <div class="column" id="liste-patients">
+            <h2>List of Patients</h2>
+            <ul id="patients-list">
+                <!-- The list of patients will be displayed here -->
+            </ul>
+        </div>
 
-            <label for="age">Âge :</label>
-            <input type="number" id="age" required>
+        <div class="column" id="patient-form">
+            <h2>Add a New Patient</h2>
+            <form id="add-patient-form">
+                <label for="nom">Nom:</label>
+                <input type="text" id="nom" required>
 
-            <button type="button" onclick="ajouterPatient()">Ajouter Patient</button>
-        </form>
+                <label for="prenom">Prénom:</label>
+                <input type="text" id="prenom" required>
+
+                <label for="age">Âge:</label>
+                <input type="number" id="age" required>
+
+                <button type="button" onclick="ajouterPatient()">Add Patient</button>
+            </form>
+        </div>
     </section>
 
-    <section id="liste-patients">
-        <h2>Liste des Patients</h2>
-        <ul id="patients-list">
-            <!-- La liste des patients sera affichée ici -->
-        </ul>
+    <section id="doctor-info">
+        <div class="column">
+            <h2>Horaires de Travail</h2>
+            <p>Monday - Friday: 9:00 AM - 5:00 PM</p>
+        </div>
+        <div class="column">
+            <h2>Coordonnées</h2>
+            <p>Address: Rue de la Paix</p>
+            <p>Phone: 123-456-7890</p>
+            <p>Email: dr.seyma@example.com</p>
+        </div>
+        <div class="column">
+            <h2>Dr. Seyma Zeggdene</h2>
+            <p>Spécialité: Dentist</p>
+        </div>
     </section>
+
     <footer>
-        <p>Ce site est destiné à la gestion des patients.</p>
+        <p>This site is for patient management.</p>
     </footer>
-    
+
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="script.js"></script>
-    
+
+    <script>
+        $(document).ready(function () {
+            afficherListePatients();
+        });
+    </script>
 </body>
+
 </html>
