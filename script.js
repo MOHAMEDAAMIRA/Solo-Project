@@ -81,43 +81,16 @@ function supprimerPatient(index) {
     afficherListePatients();
 }
 
-function modifierPatient(index) {
-    var nom = prompt('New name:', patients[index].nom);
-    var prenom = prompt('New first name:', patients[index].prenom);
-    var age = prompt('New age:', patients[index].age);
-    var date_naissance = prompt('New date of birth:', patients[index].date_naissance);
-    var telephone = prompt('New phone number:', patients[index].telephone);
-    var email = prompt('New email:', patients[index].email);
-    var adresse = prompt('New adresse:', patients[index].adresse);
-    var dernier_rv = prompt('New last RV:', patients[index].dernier_rv);
-    var prochain_rv = prompt('New next RV:', patients[index].prochain_rv);
-    var note_consultations = prompt('New note consultations:', patients[index]);
 
-    if (isNaN(age) || age <= 0) {
-        alert('Please enter a valid age.');
-        return;
-    }
 
-    patients[index].nom = nom;
-    patients[index].prenom = prenom;
-    patients[index].age = age;
-    patients[index].date_naissance= date_naissance;
-    patients[index].telephone = telephone;
-    patients[index].email = email;
-    patients[index].adresse = adresse;
-    patients[index].dernier_rv = dernier_rv;
-    patients[index].prochain_rv = prochain_rv;
-    patients[index].note_consultations = note_consultations;
-
-    afficherListePatients();
-}
-
-function afficherListePatients() {
+function afficherListePatients(filteredPatients) {
     var patientsListe = $('#patients-list');
     patientsListe.empty();
 
-    for (var i = 0; i < patients.length; i++) {
-        var patient = patients[i];
+    var patientsToDisplay = filteredPatients || patients;
+
+    for (var i = 0; i < patientsToDisplay.length; i++) {
+        var patient = patientsToDisplay[i];
 
         patientsListe.append('<li>' +
             '<span class="patient-info">' +
@@ -129,24 +102,82 @@ function afficherListePatients() {
     }
 }
 
+
 function afficherDetails(index) {
     var detailsContainer = $('#patient-details-' + index);
     detailsContainer.empty();
 
     var patient = patients[index];
 
-    detailsContainer.append('<p><strong>Nom:</strong> ' + patient.nom + '</p>' +
-        '<p><strong>Prénom:</strong> ' + patient.prenom + '</p>' +
-        '<p><strong>Age:</strong> ' + patient.age + ' ans</p>' +
-        '<p><strong>Date de naissance:</strong> ' + patient.date_naissance + '</p>' +
-        '<p><strong>Téléphone:</strong> ' + patient.telephone + '</p>' +
-        '<p><strong>Email:</strong> ' + patient.email + '</p>' +
-        '<p><strong>Adresse:</strong> ' + patient.adresse + '</p>' +
-        '<p><strong>Dernier Rendez-vous:</strong>' + patient.dernier_rv + '</p>' +
-        '<p><strong>Prochain Rendez-vous:</strong> ' + patient.prochain_rv + '</p>' +
-        '<p><strong>Note de consultations:</strong> ' + patient.note_consultations + '</p>' +
-        '<button onclick="modifierPatient(' + index + ')">Modifier</button>');
+    detailsContainer.append(
+        '<p><strong>Nom:</strong> <span id="detail-nom">' + patient.nom + '</span></p>' +
+        '<p><strong>Prénom:</strong> <span id="detail-prenom">' + patient.prenom + '</span></p>' +
+        '<p><strong>Age:</strong> <span id="detail-age">' + patient.age + ' ans</span></p>' +
+        '<p><strong>Date de naissance:</strong> <span id="detail-date_naissance">' + patient.date_naissance + '</span></p>' +
+        '<p><strong>Téléphone:</strong> <span id="detail-telephone">' + patient.telephone + '</span></p>' +
+        '<p><strong>Email:</strong> <span id="detail-email">' + patient.email + '</span></p>' +
+        '<p><strong>Adresse:</strong> <span id="detail-adresse">' + patient.adresse + '</span></p>' +
+        '<p><strong>Dernier Rendez-vous:</strong> <span id="detail-dernier_rv">' + patient.dernier_rv + '</span></p>' +
+        '<p><strong>Prochain Rendez-vous:</strong> <span id="detail-prochain_rv">' + patient.prochain_rv + '</span></p>' +
+        '<p><strong>Note de consultations:</strong> <span id="detail-note_consultations">' + patient.note_consultations + '</span></p>' +
+        '<button onclick="editDetails(' + index + ')">Edit</button>'
+    );
 }
+
+function editDetails(index) {
+    var detailsContainer = $('#patient-details-' + index);
+
+    // Replace spans with input fields for each detail
+    $('#detail-nom').html('<input type="text" id="edit-nom" value="' + patients[index].nom + '">');
+    $('#detail-prenom').html('<input type="text" id="edit-prenom" value="' + patients[index].prenom + '">');
+    $('#detail-age').html('<input type="number" id="edit-age" value="' + patients[index].age + '">');
+    $('#detail-date_naissance').html('<input type="text" id="edit-date_naissance" value="' + patients[index].date_naissance + '">');
+    $('#detail-telephone').html('<input type="text" id="edit-telephone" value="' + patients[index].telephone + '">');
+    $('#detail-email').html('<input type="text" id="edit-email" value="' + patients[index].email + '">');
+    $('#detail-adresse').html('<input type="text" id="edit-adresse" value="' + patients[index].adresse + '">');
+    $('#detail-dernier_rv').html('<input type="text" id="edit-dernier_rv" value="' + patients[index].dernier_rv + '">');
+    $('#detail-prochain_rv').html('<input type="text" id="edit-prochain_rv" value="' + patients[index].prochain_rv + '">');
+    $('#detail-note_consultations').html('<input type="text" id="edit-note_consultations" value="' + patients[index].note_consultations + '">');
+
+    // Change the Edit button to a Save button
+    detailsContainer.find('button').text('Save').attr('onclick', 'saveDetails(' + index + ')');
+}
+
+function saveDetails(index) {
+    // Retrieve the values from the edited input fields
+    var editedNom = $('#edit-nom').val();
+    var editedPrenom = $('#edit-prenom').val();
+    var editedAge = $('#edit-age').val();
+    var editedDateNaissance = $('#edit-date_naissance').val();
+    var editedTelephone = $('#edit-telephone').val();
+    var editedEmail = $('#edit-email').val();
+    var editedAdresse = $('#edit-adresse').val();
+    var editedDernierRV = $('#edit-dernier_rv').val();
+    var editedProchainRV = $('#edit-prochain_rv').val();
+    var editedNoteConsultations = $('#edit-note_consultations').val();
+
+    // Validate the edited age
+    if (isNaN(editedAge) || editedAge <= 0) {
+        alert('Please enter a valid age.');
+        return;
+    }
+
+    // Update the patient object with the edited values
+    patients[index].nom = editedNom;
+    patients[index].prenom = editedPrenom;
+    patients[index].age = editedAge;
+    patients[index].date_naissance = editedDateNaissance;
+    patients[index].telephone = editedTelephone;
+    patients[index].email = editedEmail;
+    patients[index].adresse = editedAdresse;
+    patients[index].dernier_rv = editedDernierRV;
+    patients[index].prochain_rv = editedProchainRV;
+    patients[index].note_consultations = editedNoteConsultations;
+
+    // Re-display the details with the updated information
+    afficherDetails(index);
+}
+
 
 function toggleDetails(index) {
     var detailsContainer = $('#patient-details-' + index);
@@ -154,4 +185,16 @@ function toggleDetails(index) {
     if (detailsContainer.is(':visible')) {
         afficherDetails(index);
     }
+}
+
+function searchPatients() {
+    var searchInput = $('#search-bar').val().toLowerCase();
+
+    var filteredPatients = patients.filter(function(patient) {
+        var fullName = (patient.nom + ' ' + patient.prenom).toLowerCase();
+        return fullName.includes(searchInput);
+    });
+
+    // Display the filtered patients
+    afficherListePatients(filteredPatients);
 }

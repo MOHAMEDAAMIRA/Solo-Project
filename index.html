@@ -5,26 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap">
     <title>Patient Management</title>
 </head>
 
 <body>
     <header>
-        <img id="logo" src="/assets/logo-sayma-z.png" alt="Logo">
-        <h1>Dr. Seyma Zeggdene</h1>
-        <h2>Patient Management</h2>
+        <img id="logo" src="/assets/logo-blanc.png" alt="Logo">
+        <h1>Dr. Sayma Zeggdene</h1>
+        <h2>Gestion des Patients</h2>
     </header>
 
     <section id="main-section">
         <div class="column" id="liste-patients">
-            <h2>List of Patients</h2>
+            <h2>Liste des patients</h2>
+            <div id="search-bar-container">
+                <label for="search-bar">Search:</label>
+                <input type="text" id="search-bar" oninput="searchPatients()">
+            </div>
             <ul id="patients-list">
                 <!-- The list of patients will be displayed here -->
             </ul>
         </div>
 
         <div class="column" id="patient-form">
-            <h2>Add a New Patient</h2>
+            <h2>Ajouter un nouveau patient</h2>
             <form id="add-patient-form">
                 <label for="nom">Nom:</label>
                 <input type="text" id="nom" required>
@@ -42,23 +47,34 @@
 
     <section id="doctor-info">
         <div class="column">
-            <h2>Horaires de Travail</h2>
-            <p>Monday - Friday: 9:00 AM - 5:00 PM</p>
+            <h2>Docteur Sayma ZEGDENE</h2>
+            <p>Médecin Dentiste
+            Spécialiste en occlusodontie
+        et désordres temporo-mandibulaires</p>
         </div>
         <div class="column">
             <h2>Coordonnées</h2>
-            <p>Address: Rue de la Paix</p>
-            <p>Phone: 123-456-7890</p>
-            <p>Email: dr.seyma@example.com</p>
+            <p>Address: Carnoy Center Ancien Golden Palace, Bureau 2.4, 10 Ave d’Afrique, Menzah 5 - Ariana</p>
+            <p>Phone: +216  28 316 999     +216  29 165 265</p>
+            <p>Email: dr.seyma@gmail.com</p>
         </div>
+        
         <div class="column">
-            <h2>Dr. Seyma Zeggdene</h2>
-            <p>Spécialité: Dentist</p>
+            <h2>Horaires de Travail</h2>
+            <p>Lundi: 9:00 - 17:00</p>
+            <p>Mardi: 9:00 - 17:00</p>
+            <p>Mercredi: 9:00 - 17:00</p>
+            <p>Jeudi: 9:00 - 17:00</p>
+            <p>Samedi: 9:00 - 17:00</p>
+            <p>Dimanche: 9:00 - 13:00</p>
         </div>
+    </section>
+    <section>
+        <p>Mohamed</p>
     </section>
 
     <footer>
-        <p>This site is for patient management.</p>
+        <p>Tous droits reservés © 2023: Dr. Sayma ZEGGDENE - Developpé par M.A.A</p>
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
